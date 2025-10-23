@@ -1,0 +1,23 @@
+<resources>
+    <string name="app_name">🐱 Cat Shelter</string>
+    <string name="add_cat">Add New Cat</string>
+    <string name="edit_cat">Edit Cat</string>
+    <string name="cat_name">Cat Name</string>
+    <string name="cat_age">Age (years)</string>
+    <string name="cat_breed">Breed</string>
+    <string name="cat_color">Color</string>
+    <string name="cat_description">Description</string>
+    <string name="arrival_date">Arrival Date</string>
+    <string name="medical_notes">Medical Notes</string>
+    <string name="adopted">Adopted</string>
+    <string name="adopt_cat">Adopt Cat</string>
+    <string name="delete_cat">Remove from Shelter</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="no_cats_yet">No cats in shelter yet</string>
+    <string name="add_first_cat">Add your first cat to get started!</string>
+    <string name="cat_details">Cat Details</string>
+    <string name="years_old">years old</string>
+    <string name="available_for_adoption">Available for Adoption</string>
+    <string name="recently_adopted">Recently Adopted</string>
+</resources>
