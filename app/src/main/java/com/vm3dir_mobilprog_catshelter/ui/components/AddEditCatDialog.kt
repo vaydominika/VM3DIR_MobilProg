@@ -37,6 +37,12 @@ fun AddEditCatDialog(
     var medicalNotes by remember { mutableStateOf(cat?.medicalNotes ?: "") }
     var specialNeeds by remember { mutableStateOf(cat?.specialNeeds ?: false) }
     
+    var nameError by remember { mutableStateOf("") }
+    var colorError by remember { mutableStateOf("") }
+    var arrivalDateError by remember { mutableStateOf("") }
+    var genderError by remember { mutableStateOf("") }
+    var showErrors by remember { mutableStateOf(false) }
+    
     var showGenderMenu by remember { mutableStateOf(false) }
     val genderOptions = listOf("Female", "Male")
     
@@ -59,14 +65,25 @@ fun AddEditCatDialog(
             ) {
                 OutlinedTextField(
                     value = name,
-                    onValueChange = { name = it },
-                    label = { Text("Cat Name", color = TextPink) },
+                    onValueChange = { 
+                        name = it
+                        if (showErrors && nameError.isNotEmpty()) {
+                            nameError = if (it.isBlank()) "Name is required" else ""
+                        }
+                    },
+                    label = { Text("Cat Name*", color = TextPink) },
                     modifier = Modifier.fillMaxWidth(),
+                    isError = nameError.isNotEmpty(),
+                    supportingText = if (nameError.isNotEmpty()) {
+                        { Text(nameError, color = MaterialTheme.colorScheme.error) }
+                    } else null,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = AccentPink,
                         unfocusedBorderColor = Pink200,
                         focusedLabelColor = AccentPink,
-                        unfocusedLabelColor = TextPink
+                        unfocusedLabelColor = TextPink,
+                        errorBorderColor = MaterialTheme.colorScheme.error,
+                        errorLabelColor = MaterialTheme.colorScheme.error
                     ),
                     leadingIcon = {
                         Icon(
@@ -129,14 +146,25 @@ fun AddEditCatDialog(
                 ) {
                     OutlinedTextField(
                         value = color,
-                        onValueChange = { color = it },
-                        label = { Text("Color", color = TextPink) },
+                        onValueChange = { 
+                            color = it
+                            if (showErrors && colorError.isNotEmpty()) {
+                                colorError = if (it.isBlank()) "Color is required" else ""
+                            }
+                        },
+                        label = { Text("Color*", color = TextPink) },
                         modifier = Modifier.weight(1f),
+                        isError = colorError.isNotEmpty(),
+                        supportingText = if (colorError.isNotEmpty()) {
+                            { Text(colorError, color = MaterialTheme.colorScheme.error) }
+                        } else null,
                         colors = OutlinedTextFieldDefaults.colors(
                             focusedBorderColor = AccentPink,
                             unfocusedBorderColor = Pink200,
                             focusedLabelColor = AccentPink,
-                            unfocusedLabelColor = TextPink
+                            unfocusedLabelColor = TextPink,
+                            errorBorderColor = MaterialTheme.colorScheme.error,
+                            errorLabelColor = MaterialTheme.colorScheme.error
                         ),
                         leadingIcon = {
                             Icon(
@@ -152,13 +180,19 @@ fun AddEditCatDialog(
                             value = gender,
                             onValueChange = { },
                             readOnly = true,
-                            label = { Text("Gender", color = TextPink) },
+                            label = { Text("Gender*", color = TextPink) },
                             modifier = Modifier.fillMaxWidth(),
+                            isError = genderError.isNotEmpty(),
+                            supportingText = if (genderError.isNotEmpty()) {
+                                { Text(genderError, color = MaterialTheme.colorScheme.error) }
+                            } else null,
                             colors = OutlinedTextFieldDefaults.colors(
                                 focusedBorderColor = AccentPink,
                                 unfocusedBorderColor = Pink200,
                                 focusedLabelColor = AccentPink,
-                                unfocusedLabelColor = TextPink
+                                unfocusedLabelColor = TextPink,
+                                errorBorderColor = MaterialTheme.colorScheme.error,
+                                errorLabelColor = MaterialTheme.colorScheme.error
                             ),
                             trailingIcon = {
                                 IconButton(onClick = { showGenderMenu = true }) {
@@ -181,6 +215,9 @@ fun AddEditCatDialog(
                                     onClick = {
                                         gender = option
                                         showGenderMenu = false
+                                        if (showErrors && genderError.isNotEmpty()) {
+                                            genderError = ""
+                                        }
                                     }
                                 )
                             }
@@ -190,14 +227,25 @@ fun AddEditCatDialog(
                 
                 OutlinedTextField(
                     value = arrivalDate,
-                    onValueChange = { arrivalDate = it },
-                    label = { Text("Arrival Date (YYYY-MM-DD)", color = TextPink) },
+                    onValueChange = { 
+                        arrivalDate = it
+                        if (showErrors && arrivalDateError.isNotEmpty()) {
+                            arrivalDateError = if (it.isBlank()) "Arrival date is required" else ""
+                        }
+                    },
+                    label = { Text("Arrival Date (YYYY-MM-DD)*", color = TextPink) },
                     modifier = Modifier.fillMaxWidth(),
+                    isError = arrivalDateError.isNotEmpty(),
+                    supportingText = if (arrivalDateError.isNotEmpty()) {
+                        { Text(arrivalDateError, color = MaterialTheme.colorScheme.error) }
+                    } else null,
                     colors = OutlinedTextFieldDefaults.colors(
                         focusedBorderColor = AccentPink,
                         unfocusedBorderColor = Pink200,
                         focusedLabelColor = AccentPink,
-                        unfocusedLabelColor = TextPink
+                        unfocusedLabelColor = TextPink,
+                        errorBorderColor = MaterialTheme.colorScheme.error,
+                        errorLabelColor = MaterialTheme.colorScheme.error
                     ),
                     leadingIcon = {
                         Icon(
@@ -287,8 +335,15 @@ fun AddEditCatDialog(
         confirmButton = {
             Button(
                 onClick = {
-                    if (name.isNotBlank() && age.isNotBlank() && breed.isNotBlank() && 
-                        color.isNotBlank() && arrivalDate.isNotBlank()) {
+                    nameError = if (name.isBlank()) "Name is required" else ""
+                    colorError = if (color.isBlank()) "Color is required" else ""
+                    arrivalDateError = if (arrivalDate.isBlank()) "Arrival date is required" else ""
+                    genderError = if (gender.isBlank()) "Gender is required" else ""
+                    
+                    showErrors = true
+                    
+                    if (nameError.isEmpty() && colorError.isEmpty() && 
+                        arrivalDateError.isEmpty() && genderError.isEmpty()) {
                         val newCat = Cat(
                             id = cat?.id ?: 0,
                             name = name.trim(),
