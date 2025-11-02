@@ -1,19 +1,17 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- Baby Pink Color Palette -->
-    <color name="primary_pink">#F8BBD9</color>      <!-- Main pink -->
-    <color name="light_pink">#FCE4EC</color>        <!-- Background -->
-    <color name="accent_pink">#F48FB1</color>       <!-- Accent -->
-    <color name="dark_pink">#E91E63</color>         <!-- Dark pink -->
-    <color name="soft_white">#FFF8FC</color>        <!-- Card background -->
-    <color name="text_pink">#AD1457</color>         <!-- Text color -->
-    <color name="pink_100">#F8BBD9</color>          <!-- Light pink variant -->
-    <color name="pink_200">#F48FB1</color>          <!-- Medium pink -->
-    <color name="pink_300">#E91E63</color>          <!-- Dark pink -->
-    <color name="pink_400">#C2185B</color>          <!-- Darker pink -->
-    <color name="pink_500">#AD1457</color>          <!-- Darkest pink -->
+    <color name="primary_pink">#F8BBD9</color>
+    <color name="light_pink">#FCE4EC</color>
+    <color name="accent_pink">#F48FB1</color>
+    <color name="dark_pink">#E91E63</color>
+    <color name="soft_white">#FFF8FC</color>
+    <color name="text_pink">#AD1457</color>
+    <color name="pink_100">#F8BBD9</color>
+    <color name="pink_200">#F48FB1</color>
+    <color name="pink_300">#E91E63</color>
+    <color name="pink_400">#C2185B</color>
+    <color name="pink_500">#AD1457</color>
     
-    <!-- Legacy colors for compatibility -->
     <color name="purple_200">#F8BBD9</color>
     <color name="purple_500">#F48FB1</color>
     <color name="purple_700">#E91E63</color>

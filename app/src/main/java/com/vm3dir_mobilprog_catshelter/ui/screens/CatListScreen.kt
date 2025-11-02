@@ -227,7 +227,7 @@ fun CatListScreen(
                     }
                 ) {
                     Text(
-                        text = "",
+                        text = "Delete",
                         color = DarkPink
                     )
                 }
